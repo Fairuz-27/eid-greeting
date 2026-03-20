@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>عيد سعيد🌙</title>
+<title>عيد سعيد 🌙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -15,9 +15,9 @@ body {
   align-items:center;
   color:white;
   overflow:hidden;
+  cursor:pointer; /* klik anywhere */
 }
 
-/* overlay gelap */
 .overlay {
   position:fixed;
   width:100%;
@@ -27,7 +27,6 @@ body {
   left:0;
 }
 
-/* bulan */
 .moon {
   position:absolute;
   top:60px;
@@ -39,7 +38,6 @@ body {
   box-shadow:0 0 40px rgba(255,255,255,0.8);
 }
 
-/* bintang */
 .stars::after {
   content:"";
   position:absolute;
@@ -85,7 +83,6 @@ button {
   cursor:pointer;
 }
 
-/* card */
 .card {
   display:none;
   background:rgba(255,255,255,0.1);
@@ -114,7 +111,7 @@ h2,p {
 </style>
 </head>
 
-<body>
+<body id="body">
 
 <div class="overlay"></div>
 <div class="moon"></div>
@@ -127,24 +124,43 @@ h2,p {
   <input id="nama" placeholder="Nama kamu...">
   <br>
   <button onclick="go()">Lihat Ucapan 💌</button>
+  <p style="font-size:11px;opacity:0.7;">Tap anywhere di halaman juga akan memulai musik 🎵</p>
 </div>
 
 <div class="card" id="card">
   <h2>🌙 عيد سعيد! 🌙</h2>
-
   <p id="isi"></p>
-
   <div class="from">— From Fairuz 💫</div>
 </div>
 
 </div>
 
-<!-- backsound takbiran -->
+<!-- Backsound Takbiran -->
 <audio id="bgm" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/04/27/audio_0a3c3b9f7d.mp3?filename=takbir-eid-110624.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+let audio = document.getElementById("bgm");
+audio.volume = 0;  // start muted
+audio.play().catch(()=>console.log("Audio butuh interaksi user"));
+
+// fade-in otomatis setelah klik
+function fadeInAudio(){
+    let vol = 0;
+    let interval = setInterval(()=>{
+        if(vol<0.3){
+            vol += 0.01;
+            audio.volume = vol;
+        } else clearInterval(interval);
+    },50);
+}
+
+document.getElementById("body").addEventListener("click", ()=>{
+    audio.play();
+    fadeInAudio();
+});
+
 function go(){
     let n=document.getElementById("nama").value;
     if(n==""){ alert("Isi nama dulu 😤"); return; }
@@ -158,11 +174,10 @@ function go(){
     "أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة.<br>"+
     "لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹<br><br>"+
     "عيد فطر مبارك وكل عام وأنتم إلى اللــه أقرب";
-
-    // play backsound takbiran
-    let audio = document.getElementById("bgm");
-    audio.volume = 0.3; // lembut
-    audio.play().catch(() => console.log("Klik tombol dulu agar audio jalan"));
+    
+    // fade-in pas klik tombol juga
+    audio.play();
+    fadeInAudio();
 }
 </script>
 
