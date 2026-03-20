@@ -23,11 +23,11 @@ html, body {
   position:fixed;
   top:60px;
   right:60px;
-  width:60px;
-  height:60px;
+  width:70px;
+  height:70px;
   background: radial-gradient(circle,#fff 60%,#ddd);
   border-radius:50%;
-  box-shadow:0 0 30px rgba(255,255,255,0.7);
+  box-shadow:0 0 40px rgba(255,255,255,0.8);
 }
 
 /* ⭐ Bintang */
@@ -39,10 +39,24 @@ html, body {
   border-radius:50%;
   animation: twinkle 2s infinite alternate;
 }
-
 @keyframes twinkle {
   from {opacity:0.2;}
   to {opacity:1;}
+}
+
+/* 🌠 Bintang jatuh */
+.shooting-star {
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 10px white;
+  animation:shoot 2s linear forwards;
+}
+@keyframes shoot {
+  0% {transform:translate(0,0); opacity:1;}
+  100% {transform:translate(-400px,400px); opacity:0;}
 }
 
 /* Container */
@@ -50,9 +64,9 @@ html, body {
   text-align:center;
 }
 
-/* 🕌 Masjid SVG */
+/* 🕌 MASJID (lebih jelas bentuknya) */
 .masjid svg {
-  width:120px;
+  width:130px;
   margin-bottom:15px;
   fill:white;
 }
@@ -77,10 +91,11 @@ button {
 /* Card */
 .card {
   display:none;
-  background:rgba(255,255,255,0.1);
+  background:rgba(0,0,0,0.5);
   padding:25px;
   border-radius:20px;
   width:300px;
+  backdrop-filter: blur(10px);
 }
 .card.show { display:block; }
 
@@ -92,11 +107,12 @@ h2,p { direction:rtl; }
   opacity:0.8;
 }
 
-/* 🎉 Confetti */
+/* 🎉 Confetti BAGUS (bulat + warna lembut) */
 .confetti {
   position:absolute;
-  width:8px;
-  height:8px;
+  width:6px;
+  height:6px;
+  border-radius:50%;
   animation:fall 3s linear forwards;
 }
 @keyframes fall {
@@ -113,10 +129,10 @@ h2,p { direction:rtl; }
 <div class="container">
   <div id="start">
 
-    <!-- 🕌 MASJID FIX -->
+    <!-- 🕌 MASJID FIX (lebih keliatan kubah + menara) -->
     <div class="masjid">
       <svg viewBox="0 0 64 64">
-        <path d="M32 6l6 6v6h-4v-4h-4v4h-4v-6l6-6zm-14 14h28v30h-6v-16h-16v16h-6v-30zm-4 30h36v4h-36v-4z"/>
+        <path d="M32 4a6 6 0 0 1 6 6v2h4v-2a10 10 0 0 0-20 0v2h4v-2a6 6 0 0 1 6-6zm-14 12h28v32h-6V30H24v18h-6V16zm-4 32h36v4H14v-4z"/>
       </svg>
     </div>
 
@@ -133,7 +149,7 @@ h2,p { direction:rtl; }
 </div>
 
 <script>
-/* ⭐ BINTANG BANYAK */
+/* ⭐ Bintang banyak */
 function createStars(){
   for(let i=0;i<120;i++){
     let s=document.createElement("div");
@@ -146,13 +162,23 @@ function createStars(){
 }
 createStars();
 
-/* 🎉 CONFETTI */
+/* 🌠 Bintang jatuh */
+setInterval(()=>{
+  let s=document.createElement("div");
+  s.className="shooting-star";
+  s.style.top=Math.random()*200+"px";
+  s.style.left=Math.random()*window.innerWidth+"px";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),2000);
+}, 1500);
+
+/* 🎉 Confetti bagus */
 function confetti(){
-  for(let i=0;i<25;i++){
+  for(let i=0;i<30;i++){
     let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*window.innerWidth+"px";
-    c.style.background=`hsl(${Math.random()*360},80%,60%)`;
+    c.style.background=`hsl(${Math.random()*360},70%,70%)`;
     document.body.appendChild(c);
     setTimeout(()=>c.remove(),3000);
   }
