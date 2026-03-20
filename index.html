@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>عيد فطر مبارك 🌙</title>
+<h2>🌙 عيد سعيد! 🌙</h2>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
   margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background: url('https://images.unsplash.com/photo-1591608511723-3c8c1db0d4c4?q=80&w=1200') no-repeat center center/cover;
+  font-family:'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   height:100vh;
   display:flex;
   justify-content:center;
@@ -17,27 +17,49 @@ body {
   overflow:hidden;
 }
 
-/* overlay gelap */
+/* overlay */
 .overlay {
   position:fixed;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.6);
+  background:rgba(0,0,0,0.5);
   top:0;
   left:0;
 }
 
+/* bulan */
+.moon {
+  position:absolute;
+  top:60px;
+  right:60px;
+  width:80px;
+  height:80px;
+  background: radial-gradient(circle,#fff 60%,#ddd);
+  border-radius:50%;
+  box-shadow:0 0 40px rgba(255,255,255,0.8);
+}
+
 /* bintang */
-.star {
+.stars::after {
+  content:"";
   position:absolute;
   width:2px;
   height:2px;
   background:white;
-  animation:twinkle 2s infinite alternate;
+  box-shadow:
+    50px 100px white,
+    150px 200px white,
+    300px 50px white,
+    400px 300px white,
+    600px 150px white,
+    800px 250px white,
+    200px 400px white,
+    700px 100px white;
+  animation:blink 2s infinite alternate;
 }
 
-@keyframes twinkle {
-  from {opacity:0.2;}
+@keyframes blink {
+  from {opacity:0.3;}
   to {opacity:1;}
 }
 
@@ -47,8 +69,7 @@ body {
   text-align:center;
 }
 
-/* input awal */
-#start input {
+input {
   padding:10px;
   border:none;
   border-radius:10px;
@@ -96,17 +117,8 @@ h2,p {
 <body>
 
 <div class="overlay"></div>
-
-<!-- bintang random -->
-<script>
-for(let i=0;i<50;i++){
-  let s=document.createElement("div");
-  s.className="star";
-  s.style.top=Math.random()*100+"%";
-  s.style.left=Math.random()*100+"%";
-  document.body.appendChild(s);
-}
-</script>
+<div class="moon"></div>
+<div class="stars"></div>
 
 <div class="container">
 
@@ -118,7 +130,7 @@ for(let i=0;i<50;i++){
 </div>
 
 <div class="card" id="card">
-  <h2>🌙 عيد فطر مبارك 🌙</h2>
+  <h2>🌙 كل عام وأنتم بخير وسعادة 🌙</h2>
 
   <p id="isi"></p>
 
@@ -127,9 +139,9 @@ for(let i=0;i<50;i++){
 
 </div>
 
-<!-- musik -->
-<audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+<!-- backsound (takbiran vibes) -->
+<audio id="bgm" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -146,6 +158,9 @@ document.getElementById("isi").innerHTML =
 "أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة.<br>"+
 "لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹<br><br>"+
 "عيد فطر مبارك وكل عام وأنتم إلى اللــه أقرب";
+
+// play musik setelah klik
+document.getElementById("bgm").play();
 }
 </script>
 
