@@ -15,9 +15,33 @@ html, body {
   display:flex;
   justify-content:center;
   align-items:center;
+  overflow:hidden;
 }
 
-/* Bulan */
+/* ⭐ Bintang */
+.stars::after {
+  content:"";
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  box-shadow:
+    50px 100px white,
+    150px 200px white,
+    300px 50px white,
+    400px 300px white,
+    600px 150px white,
+    800px 250px white,
+    200px 400px white,
+    700px 100px white;
+  animation:blink 2s infinite alternate;
+}
+@keyframes blink {
+  from {opacity:0.3;}
+  to {opacity:1;}
+}
+
+/* 🌙 Bulan */
 .moon {
   position:fixed;
   top:60px;
@@ -71,18 +95,31 @@ h2,p { direction:rtl; }
   font-size:14px;
   opacity:0.8;
 }
+
+/* 🎉 Confetti */
+.confetti {
+  position:absolute;
+  width:8px;
+  height:8px;
+  animation:fall 3s linear forwards;
+}
+@keyframes fall {
+  0%{ transform: translateY(0); opacity:1;}
+  100%{ transform: translateY(800px); opacity:0;}
+}
 </style>
 </head>
 
 <body>
 
+<div class="stars"></div>
 <div class="moon"></div>
 
 <div class="container">
   <div id="start">
 
-    <!-- ✅ MASJID (PASTI MUNCUL) -->
-    <img src="https://cdn-icons-png.flaticon.com/512/3176/3176363.png"
+    <!-- 🕌 MASJID BENER -->
+    <img src="https://cdn-icons-png.flaticon.com/512/3448/3448339.png"
          style="width:120px; margin-bottom:15px;">
 
     <input id="nama" placeholder="Nama kamu...">
@@ -98,6 +135,17 @@ h2,p { direction:rtl; }
 </div>
 
 <script>
+function confetti(){
+  for(let i=0;i<20;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*window.innerWidth+"px";
+    c.style.background=`hsl(${Math.random()*360},80%,60%)`;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+
 function go(){
   let n=document.getElementById("nama").value;
   if(n==""){ alert("Isi nama dulu 😤"); return; }
@@ -111,6 +159,8 @@ function go(){
   "أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة.<br>"+
   "لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹<br><br>"+
   "عيد فطر مبارك وكل عام وأنتم إلى اللــه أقرب";
+
+  confetti();
 }
 </script>
 
