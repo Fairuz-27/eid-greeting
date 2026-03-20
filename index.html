@@ -1,65 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>!عيد سعيد🌙</title>
+<title>!عيد سعيد 🌙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 html, body {
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
+  margin:0; padding:0;
+  width:100%; height:100%;
   font-family:'Segoe UI', sans-serif;
   overflow:hidden;
   background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 }
 
-body {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:white;
-}
+body { display:flex; justify-content:center; align-items:center; color:white; }
 
-/* Bintang tetap */
-.stars {
-  position:fixed; width:100%; height:100%; top:0; left:0; z-index:0;
-}
+.stars { position:fixed; width:100%; height:100%; top:0; left:0; z-index:0; }
 .stars::after {
-  content:"";
-  position:absolute; width:2px; height:2px; background:white;
-  box-shadow:50px 100px white,150px 200px white,300px 50px white,400px 300px white,600px 150px white,800px 250px white,200px 400px white,700px 100px white;
+  content:""; position:absolute; width:2px; height:2px; background:white;
+  box-shadow:50px 100px white,150px 200px white,300px 50px white,400px 300px white,
+             600px 150px white,800px 250px white,200px 400px white,700px 100px white;
   animation:blink 2s infinite alternate;
 }
 @keyframes blink { from {opacity:0.3;} to {opacity:1;} }
 
-/* Bulan melayang */
-.moon {
-  position:fixed; top:60px; right:60px; width:80px; height:80px;
+.moon { position:fixed; top:60px; right:60px; width:80px; height:80px;
   background: radial-gradient(circle,#fff 60%,#ddd);
-  border-radius:50%;
-  box-shadow:0 0 40px rgba(255,255,255,0.8);
+  border-radius:50%; box-shadow:0 0 40px rgba(255,255,255,0.8);
   animation: moonFloat 6s ease-in-out infinite alternate; z-index:1;
 }
 @keyframes moonFloat {0%{transform:translateY(0px);}100%{transform:translateY(15px);}}
 
-/* Container card */
+/* Container input & card */
 .container { position:relative; z-index:2; text-align:center; }
 input { padding:10px; border:none; border-radius:10px; }
 button { margin-top:10px; padding:10px; border:none; border-radius:10px; background:#00c9a7; color:white; cursor:pointer; }
 
 /* Card animasi */
 .card {
-  display:none;
-  background:rgba(255,255,255,0.1);
-  padding:25px;
-  border-radius:20px;
-  width:320px;
+  display:none; background:rgba(255,255,255,0.1); padding:25px; border-radius:20px; width:320px;
   backdrop-filter: blur(10px);
-  transform: translateY(30px) scale(0.8);
-  opacity:0;
-  transition: all 0.8s ease;
+  transform: translateY(30px) scale(0.8); opacity:0; transition: all 0.8s ease;
 }
 .card.show { display:block; transform: translateY(0) scale(1); opacity:1; }
 h2,p { direction:rtl; }
@@ -81,20 +62,19 @@ h2,p { direction:rtl; }
 
 <div class="container">
   <div id="start" style="position:relative;">
-
-    <!-- Gambar dekorasi Masjid / ketupat -->
-    <img src="https://i.ibb.co/2d3H1W7/masjid.png" 
+    <!-- Gambar Masjid / ketupat di belakang input -->
+    <img src="https://i.ibb.co/2d3H1W7/masjid.png"
          style="position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:150px; opacity:0.5; z-index:0;">
-    
+
     <input id="nama" placeholder="Nama kamu..." style="position:relative; z-index:1;">
     <br>
     <button onclick="go()" style="position:relative; z-index:1;">Lihat Ucapan 💌</button>
   </div>
 
   <div class="card" id="card">
-    <h2>🌙 !عيد سعيد 🌙</h2>
+    <h2>!عيد سعيد</h2>
     <p id="isi"></p>
-    <div class="from">—Fairuz 💫</div>
+    <div class="from">— Fairuz</div>
   </div>
 </div>
 
