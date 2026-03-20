@@ -15,7 +15,7 @@ body {
   align-items:center;
   color:white;
   overflow:hidden;
-  cursor:pointer; /* klik anywhere */
+  cursor:pointer;
 }
 
 .overlay {
@@ -56,10 +56,7 @@ body {
   animation:blink 2s infinite alternate;
 }
 
-@keyframes blink {
-  from {opacity:0.3;}
-  to {opacity:1;}
-}
+@keyframes blink { from {opacity:0.3;} to {opacity:1;} }
 
 .container {
   position:relative;
@@ -83,6 +80,7 @@ button {
   cursor:pointer;
 }
 
+/* Card animasi */
 .card {
   display:none;
   background:rgba(255,255,255,0.1);
@@ -90,23 +88,55 @@ button {
   border-radius:20px;
   width:320px;
   backdrop-filter: blur(10px);
-  animation:fade 1s ease;
+  transform: translateY(30px) scale(0.8);
+  opacity:0;
+  transition: all 0.8s ease;
 }
 
-@keyframes fade {
-  from {opacity:0; transform:translateY(20px);}
-  to {opacity:1; transform:translateY(0);}
+.card.show {
+  display:block;
+  transform: translateY(0) scale(1);
+  opacity:1;
 }
 
-h2,p {
-  direction:rtl;
-}
+h2,p { direction:rtl; }
 
 .from {
   font-size:13px;
   margin-top:10px;
   direction:ltr;
   opacity:0.8;
+}
+
+/* Bintang jatuh */
+.falling-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) translateX(0); opacity:1; }
+  100% { transform: translateY(800px) translateX(-50px); opacity:0; }
+}
+
+/* Confetti */
+.confetti {
+  position:absolute;
+  width:8px;
+  height:8px;
+  background: #ff0;
+  opacity:0.9;
+  transform: rotate(0deg);
+  animation: confetti-fall 3s linear forwards;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity:1;}
+  100% { transform: translateY(800px) rotate(360deg); opacity:0;}
 }
 </style>
 </head>
@@ -124,7 +154,7 @@ h2,p {
   <input id="nama" placeholder="Nama kamu...">
   <br>
   <button onclick="go()">Lihat Ucapan 💌</button>
-  <p style="font-size:11px;opacity:0.7;">Tap anywhere di halaman juga akan memulai musik 🎵</p>
+  <p style="font-size:11px;opacity:0.7;">Klik tombol untuk animasi ✨</p>
 </div>
 
 <div class="card" id="card">
@@ -135,38 +165,39 @@ h2,p {
 
 </div>
 
-<!-- Backsound Takbiran -->
-<audio id="bgm" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/04/27/audio_0a3c3b9f7d.mp3?filename=takbir-eid-110624.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-let audio = document.getElementById("bgm");
-audio.volume = 0;  // start muted
-audio.play().catch(()=>console.log("Audio butuh interaksi user"));
-
-// fade-in otomatis setelah klik
-function fadeInAudio(){
-    let vol = 0;
-    let interval = setInterval(()=>{
-        if(vol<0.3){
-            vol += 0.01;
-            audio.volume = vol;
-        } else clearInterval(interval);
-    },50);
+// fungsi generate bintang jatuh
+function fallingStars(){
+    for(let i=0;i<10;i++){
+        let star = document.createElement('div');
+        star.classList.add('falling-star');
+        star.style.left = Math.random()*window.innerWidth+'px';
+        star.style.animationDuration = (1.5 + Math.random()*1.5)+'s';
+        document.body.appendChild(star);
+        setTimeout(()=>star.remove(), 3000);
+    }
 }
 
-document.getElementById("body").addEventListener("click", ()=>{
-    audio.play();
-    fadeInAudio();
-});
+// fungsi generate confetti
+function confettiFall(){
+    for(let i=0;i<15;i++){
+        let conf = document.createElement('div');
+        conf.classList.add('confetti');
+        conf.style.left = Math.random()*window.innerWidth+'px';
+        conf.style.background = `hsl(${Math.random()*360}, 80%, 60%)`;
+        conf.style.animationDuration = (2 + Math.random()*2)+'s';
+        document.body.appendChild(conf);
+        setTimeout(()=>conf.remove(), 4000);
+    }
+}
 
 function go(){
     let n=document.getElementById("nama").value;
     if(n==""){ alert("Isi nama dulu 😤"); return; }
 
     document.getElementById("start").style.display="none";
-    document.getElementById("card").style.display="block";
+    let card = document.getElementById("card");
+    card.classList.add("show");
 
     document.getElementById("isi").innerHTML =
     "Teruntuk "+n+"<br><br>"+
@@ -174,12 +205,12 @@ function go(){
     "أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة.<br>"+
     "لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹<br><br>"+
     "عيد فطر مبارك وكل عام وأنتم إلى اللــه أقرب";
-    
-    // fade-in pas klik tombol juga
-    audio.play();
-    fadeInAudio();
+
+    // jalankan animasi
+    fallingStars();
+    confettiFall();
 }
 </script>
 
 </body>
-</html>
+  </html>
