@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<h2>🌙 عيد سعيد! 🌙</h2>
+<title>عيد سعيد🌙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -17,7 +17,7 @@ body {
   overflow:hidden;
 }
 
-/* overlay */
+/* overlay gelap */
 .overlay {
   position:fixed;
   width:100%;
@@ -130,7 +130,7 @@ h2,p {
 </div>
 
 <div class="card" id="card">
-  <h2>🌙 كل عام وأنتم بخير وسعادة 🌙</h2>
+  <h2>🌙 عيد سعيد! 🌙</h2>
 
   <p id="isi"></p>
 
@@ -139,9 +139,9 @@ h2,p {
 
 </div>
 
-<!-- backsound (takbiran vibes) -->
+<!-- backsound takbiran -->
 <audio id="bgm" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/download/audio/2022/04/27/audio_0a3c3b9f7d.mp3?filename=takbir-eid-110624.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -160,7 +160,9 @@ document.getElementById("isi").innerHTML =
 "عيد فطر مبارك وكل عام وأنتم إلى اللــه أقرب";
 
 // play musik setelah klik
-document.getElementById("bgm").play();
+let audio = document.getElementById("bgm");
+audio.volume = 0.3; // lembut
+audio.play();
 }
 </script>
 
