@@ -7,64 +7,97 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial;
-  background: linear-gradient(to bottom right, #d1fae5, #a7f3d0);
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #2c5364);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  color: white;
+}
+
+.container {
+  text-align: center;
 }
 
 .card {
-  background: white;
+  display: none;
+  background: rgba(255,255,255,0.1);
   padding: 25px;
   border-radius: 20px;
-  text-align: center;
   width: 320px;
+  backdrop-filter: blur(10px);
 }
 
-h2 {
-  direction: rtl;
-}
-
-p {
-  direction: rtl;
-  font-size: 14px;
-}
-
-.from {
-  margin-top: 10px;
-  font-weight: bold;
-  direction: ltr;
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 200px;
 }
 
 button {
   margin-top: 15px;
   padding: 10px;
   border: none;
-  background: green;
+  background: #00c9a7;
   color: white;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+h2, p {
+  direction: rtl;
+}
+
+.from {
+  font-size: 13px;
+  margin-top: 10px;
+  direction: ltr;
+  opacity: 0.8;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h2>🌙 عيد فطر مبارك 🌙</h2>
-  
-  <p>
-    أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة  
-    لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹
-  </p>
+<div class="container">
 
-  <div class="from">— From Fairuz 💫</div>
+  <div id="start">
+    <h3>Masukkan nama kamu dulu 👇</h3>
+    <input type="text" id="name" placeholder="Nama kamu...">
+    <br>
+    <button onclick="showCard()">Lihat Ucapan 💌</button>
+  </div>
 
-  <button onclick="alert('✨ عيد فطر مبارك ✨')">
-    Tap for a wish 💌
-  </button>
+  <div class="card" id="card">
+    <h2>🌙 عيد فطر مبارك 🌙</h2>
+
+    <p id="greeting"></p>
+
+    <div class="from">— From Fairuz 💫</div>
+  </div>
+
 </div>
+
+<script>
+function showCard() {
+  let name = document.getElementById("name").value;
+
+  if(name === "") {
+    alert("Isi nama dulu 😤");
+    return;
+  }
+
+  document.getElementById("start").style.display = "none";
+  document.getElementById("card").style.display = "block";
+
+  document.getElementById("greeting").innerHTML =
+    "إلى " + name + "<br><br>" +
+    "أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة<br>" +
+    "لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹";
+}
+</script>
 
 </body>
 </html>
