@@ -1,72 +1,141 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Eid Mubarak</title>
+<title>عيد فطر مبارك 🌙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
   margin:0;
-  font-family:sans-serif;
-  background: linear-gradient(135deg,#141e30,#243b55);
-  color:white;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('https://images.unsplash.com/photo-1591608511723-3c8c1db0d4c4?q=80&w=1200') no-repeat center center/cover;
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
+  color:white;
+  overflow:hidden;
 }
 
-.box {
+/* overlay gelap */
+.overlay {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  top:0;
+  left:0;
+}
+
+/* bintang */
+.star {
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from {opacity:0.2;}
+  to {opacity:1;}
+}
+
+.container {
+  position:relative;
+  z-index:2;
   text-align:center;
 }
 
-.card {
-  display:none;
-  background:rgba(255,255,255,0.1);
-  padding:20px;
-  border-radius:15px;
-}
-
-input {
+/* input awal */
+#start input {
   padding:10px;
-  border-radius:8px;
   border:none;
+  border-radius:10px;
 }
 
 button {
   margin-top:10px;
   padding:10px;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
+  background:#00c9a7;
+  color:white;
+  cursor:pointer;
+}
+
+/* card */
+.card {
+  display:none;
+  background:rgba(255,255,255,0.1);
+  padding:25px;
+  border-radius:20px;
+  width:320px;
+  backdrop-filter: blur(10px);
+  animation:fade 1s ease;
+}
+
+@keyframes fade {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+h2,p {
+  direction:rtl;
+}
+
+.from {
+  font-size:13px;
+  margin-top:10px;
+  direction:ltr;
+  opacity:0.8;
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="overlay"></div>
+
+<!-- bintang random -->
+<script>
+for(let i=0;i<50;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.top=Math.random()*100+"%";
+  s.style.left=Math.random()*100+"%";
+  document.body.appendChild(s);
+}
+</script>
+
+<div class="container">
 
 <div id="start">
-<h3>Masukkan nama kamu</h3>
-<input id="nama">
-<br>
-<button onclick="go()">Lihat</button>
+  <h3>Masukkan nama kamu dulu 👇</h3>
+  <input id="nama" placeholder="Nama kamu...">
+  <br>
+  <button onclick="go()">Lihat Ucapan 💌</button>
 </div>
 
 <div class="card" id="card">
-<h2>🌙 عيد فطر مبارك 🌙</h2>
+  <h2>🌙 عيد فطر مبارك 🌙</h2>
 
-<p id="isi"></p>
+  <p id="isi"></p>
 
-<p style="font-size:12px;">From Fairuz</p>
+  <div class="from">— From Fairuz 💫</div>
 </div>
 
 </div>
+
+<!-- musik -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+</audio>
 
 <script>
 function go(){
-let n = document.getElementById("nama").value;
-if(n==""){alert("isi dulu");return;}
+let n=document.getElementById("nama").value;
+if(n==""){alert("Isi nama dulu 😤");return;}
 
 document.getElementById("start").style.display="none";
 document.getElementById("card").style.display="block";
