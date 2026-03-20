@@ -1,7 +1,7 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<title>عيد سعيد 🌙</title>
+<title>عيد سعيد🌙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -22,6 +22,7 @@ body {
   color:white;
 }
 
+/* Bintang tetap */
 .stars {
   position:fixed;
   width:100%;
@@ -51,6 +52,7 @@ body {
 
 @keyframes blink { from {opacity:0.3;} to {opacity:1;} }
 
+/* Bulan melayang */
 .moon {
   position:fixed;
   top:60px;
@@ -69,25 +71,7 @@ body {
   100%{ transform: translateY(15px);}
 }
 
-/* Awan bergerak */
-.cloud {
-  position:fixed;
-  top:50px;
-  width:150px;
-  height:50px;
-  background:rgba(255,255,255,0.1);
-  border-radius:50%;
-  animation: cloudMove linear infinite;
-  z-index:0;
-}
-.cloud:nth-child(1){ top:100px; animation-duration:60s; }
-.cloud:nth-child(2){ top:180px; animation-duration:80s; }
-
-@keyframes cloudMove {
-  0%{ left:-200px; }
-  100%{ left:100vw; }
-}
-
+/* Container card */
 .container {
   position:relative;
   z-index:2;
@@ -165,8 +149,6 @@ h2,p { direction:rtl; }
 
 <div class="stars"></div>
 <div class="moon"></div>
-<div class="cloud"></div>
-<div class="cloud"></div>
 
 <div class="container">
   <div id="start">
