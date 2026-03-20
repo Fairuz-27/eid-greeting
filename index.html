@@ -59,17 +59,24 @@ html, body {
   100% {transform:translate(-400px,400px); opacity:0;}
 }
 
-/* 🎆 Petasan */
-.firework {
-  position:absolute;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  animation:explode 1s ease-out forwards;
+/* 🎉 Confetti (jatuh pelan dari atas) */
+.confetti {
+  position:fixed;
+  width:6px;
+  height:10px;
+  opacity:0.8;
+  animation:fall linear forwards;
 }
-@keyframes explode {
-  0% { transform:scale(1); opacity:1; }
-  100% { transform:scale(15); opacity:0; }
+
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity:1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity:0;
+  }
 }
 
 /* Container */
@@ -118,19 +125,6 @@ h2,p { direction:rtl; }
   margin-top:10px;
   font-size:14px;
   opacity:0.8;
-}
-
-/* 🎉 Confetti */
-.confetti {
-  position:absolute;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  animation:fall 3s linear forwards;
-}
-@keyframes fall {
-  0%{ transform: translateY(0); opacity:1;}
-  100%{ transform: translateY(800px); opacity:0;}
 }
 </style>
 </head>
@@ -185,32 +179,16 @@ setInterval(()=>{
   setTimeout(()=>s.remove(),2000);
 },1500);
 
-/* 🎆 Petasan */
-function fireworks(){
-  let x = Math.random()*window.innerWidth;
-  let y = Math.random()*window.innerHeight/2;
-
-  for(let i=0;i<20;i++){
-    let f=document.createElement("div");
-    f.className="firework";
-    f.style.left=x+"px";
-    f.style.top=y+"px";
-    f.style.background=`hsl(${Math.random()*360},80%,60%)`;
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),1000);
-  }
-}
-setInterval(fireworks,2500);
-
-/* 🎉 Confetti */
+/* 🎉 Confetti halus */
 function confetti(){
-  for(let i=0;i<30;i++){
+  for(let i=0;i<60;i++){
     let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*window.innerWidth+"px";
     c.style.background=`hsl(${Math.random()*360},70%,70%)`;
+    c.style.animationDuration=(3 + Math.random()*3)+"s";
     document.body.appendChild(c);
-    setTimeout(()=>c.remove(),3000);
+    setTimeout(()=>c.remove(),6000);
   }
 }
 
