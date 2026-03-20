@@ -18,44 +18,43 @@ html, body {
   overflow:hidden;
 }
 
-/* ⭐ Bintang */
-.stars::after {
-  content:"";
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  box-shadow:
-    50px 100px white,
-    150px 200px white,
-    300px 50px white,
-    400px 300px white,
-    600px 150px white,
-    800px 250px white,
-    200px 400px white,
-    700px 100px white;
-  animation:blink 2s infinite alternate;
-}
-@keyframes blink {
-  from {opacity:0.3;}
-  to {opacity:1;}
-}
-
 /* 🌙 Bulan */
 .moon {
   position:fixed;
   top:60px;
   right:60px;
-  width:80px;
-  height:80px;
+  width:60px;
+  height:60px;
   background: radial-gradient(circle,#fff 60%,#ddd);
   border-radius:50%;
-  box-shadow:0 0 40px rgba(255,255,255,0.8);
+  box-shadow:0 0 30px rgba(255,255,255,0.7);
+}
+
+/* ⭐ Bintang */
+.star {
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from {opacity:0.2;}
+  to {opacity:1;}
 }
 
 /* Container */
 .container {
   text-align:center;
+}
+
+/* 🕌 Masjid SVG */
+.masjid svg {
+  width:120px;
+  margin-bottom:15px;
+  fill:white;
 }
 
 /* Input */
@@ -83,10 +82,7 @@ button {
   border-radius:20px;
   width:300px;
 }
-
-.card.show {
-  display:block;
-}
+.card.show { display:block; }
 
 h2,p { direction:rtl; }
 
@@ -112,15 +108,17 @@ h2,p { direction:rtl; }
 
 <body>
 
-<div class="stars"></div>
 <div class="moon"></div>
 
 <div class="container">
   <div id="start">
 
-    <!-- 🕌 MASJID BENER -->
-    <img src="https://cdn-icons-png.flaticon.com/512/3448/3448339.png"
-         style="width:120px; margin-bottom:15px;">
+    <!-- 🕌 MASJID FIX -->
+    <div class="masjid">
+      <svg viewBox="0 0 64 64">
+        <path d="M32 6l6 6v6h-4v-4h-4v4h-4v-6l6-6zm-14 14h28v30h-6v-16h-16v16h-6v-30zm-4 30h36v4h-36v-4z"/>
+      </svg>
+    </div>
 
     <input id="nama" placeholder="Nama kamu...">
     <br>
@@ -135,8 +133,22 @@ h2,p { direction:rtl; }
 </div>
 
 <script>
+/* ⭐ BINTANG BANYAK */
+function createStars(){
+  for(let i=0;i<120;i++){
+    let s=document.createElement("div");
+    s.className="star";
+    s.style.top=Math.random()*window.innerHeight+"px";
+    s.style.left=Math.random()*window.innerWidth+"px";
+    s.style.animationDuration=(1+Math.random()*2)+"s";
+    document.body.appendChild(s);
+  }
+}
+createStars();
+
+/* 🎉 CONFETTI */
 function confetti(){
-  for(let i=0;i<20;i++){
+  for(let i=0;i<25;i++){
     let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*window.innerWidth+"px";
@@ -146,6 +158,7 @@ function confetti(){
   }
 }
 
+/* MAIN */
 function go(){
   let n=document.getElementById("nama").value;
   if(n==""){ alert("Isi nama dulu 😤"); return; }
