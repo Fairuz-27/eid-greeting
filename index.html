@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>عيد سعيد🌙</title>
+<title>!عيد سعيد🌙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -24,75 +24,30 @@ body {
 
 /* Bintang tetap */
 .stars {
-  position:fixed;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-  z-index:0;
+  position:fixed; width:100%; height:100%; top:0; left:0; z-index:0;
 }
-
 .stars::after {
   content:"";
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  box-shadow:
-    50px 100px white,
-    150px 200px white,
-    300px 50px white,
-    400px 300px white,
-    600px 150px white,
-    800px 250px white,
-    200px 400px white,
-    700px 100px white;
+  position:absolute; width:2px; height:2px; background:white;
+  box-shadow:50px 100px white,150px 200px white,300px 50px white,400px 300px white,600px 150px white,800px 250px white,200px 400px white,700px 100px white;
   animation:blink 2s infinite alternate;
 }
-
 @keyframes blink { from {opacity:0.3;} to {opacity:1;} }
 
 /* Bulan melayang */
 .moon {
-  position:fixed;
-  top:60px;
-  right:60px;
-  width:80px;
-  height:80px;
+  position:fixed; top:60px; right:60px; width:80px; height:80px;
   background: radial-gradient(circle,#fff 60%,#ddd);
   border-radius:50%;
   box-shadow:0 0 40px rgba(255,255,255,0.8);
-  animation: moonFloat 6s ease-in-out infinite alternate;
-  z-index:1;
+  animation: moonFloat 6s ease-in-out infinite alternate; z-index:1;
 }
-
-@keyframes moonFloat {
-  0%{ transform: translateY(0px);}
-  100%{ transform: translateY(15px);}
-}
+@keyframes moonFloat {0%{transform:translateY(0px);}100%{transform:translateY(15px);}}
 
 /* Container card */
-.container {
-  position:relative;
-  z-index:2;
-  text-align:center;
-}
-
-input {
-  padding:10px;
-  border:none;
-  border-radius:10px;
-}
-
-button {
-  margin-top:10px;
-  padding:10px;
-  border:none;
-  border-radius:10px;
-  background:#00c9a7;
-  color:white;
-  cursor:pointer;
-}
+.container { position:relative; z-index:2; text-align:center; }
+input { padding:10px; border:none; border-radius:10px; }
+button { margin-top:10px; padding:10px; border:none; border-radius:10px; background:#00c9a7; color:white; cursor:pointer; }
 
 /* Card animasi */
 .card {
@@ -106,61 +61,40 @@ button {
   opacity:0;
   transition: all 0.8s ease;
 }
-
-.card.show {
-  display:block;
-  transform: translateY(0) scale(1);
-  opacity:1;
-}
-
+.card.show { display:block; transform: translateY(0) scale(1); opacity:1; }
 h2,p { direction:rtl; }
 .from { font-size:13px; margin-top:10px; direction:ltr; opacity:0.8; }
 
 /* Bintang jatuh */
-.falling-star {
-  position:absolute;
-  width:3px; height:3px;
-  background:white; border-radius:50%;
-  animation:fall linear forwards;
-}
-
-@keyframes fall {
-  0%{ transform: translateY(0) translateX(0); opacity:1; }
-  100%{ transform: translateY(800px) translateX(-50px); opacity:0; }
-}
+.falling-star { position:absolute; width:3px; height:3px; background:white; border-radius:50%; animation:fall linear forwards; }
+@keyframes fall {0%{transform:translateY(0) translateX(0);opacity:1;}100%{transform:translateY(800px) translateX(-50px);opacity:0;}}
 
 /* Confetti */
-.confetti {
-  position:absolute;
-  width:8px; height:8px;
-  opacity:0.9;
-  transform: rotate(0deg);
-  animation: confetti-fall 3s linear forwards;
-}
-
-@keyframes confetti-fall {
-  0%{ transform: translateY(0) rotate(0deg); opacity:1; }
-  100%{ transform: translateY(800px) rotate(360deg); opacity:0; }
-}
+.confetti { position:absolute; width:8px; height:8px; opacity:0.9; transform:rotate(0deg); animation:confetti-fall 3s linear forwards; }
+@keyframes confetti-fall {0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(800px) rotate(360deg);opacity:0;}}
 </style>
 </head>
 
 <body>
-
 <div class="stars"></div>
 <div class="moon"></div>
 
 <div class="container">
-  <div id="start">
-    <input id="nama" placeholder="Nama kamu...">
+  <div id="start" style="position:relative;">
+
+    <!-- Gambar dekorasi Masjid / ketupat -->
+    <img src="https://i.ibb.co/2d3H1W7/masjid.png" 
+         style="position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:150px; opacity:0.5; z-index:0;">
+    
+    <input id="nama" placeholder="Nama kamu..." style="position:relative; z-index:1;">
     <br>
-    <button onclick="go()">Lihat Ucapan 💌</button>
+    <button onclick="go()" style="position:relative; z-index:1;">Lihat Ucapan 💌</button>
   </div>
 
   <div class="card" id="card">
-    <h2>🌙 عيد سعيد🌙</h2>
+    <h2>🌙 !عيد سعيد 🌙</h2>
     <p id="isi"></p>
-    <div class="from">— From Fairuz 💫</div>
+    <div class="from">—Fairuz 💫</div>
   </div>
 </div>
 
@@ -189,19 +123,18 @@ function confettiFall(){
 }
 
 function go(){
-    let n=document.getElementById("nama").value;
+    let n=document.getElementById("nama").value.trim();
     if(n==""){ alert("Isi nama dulu 😤"); return; }
 
     document.getElementById("start").style.display="none";
     let card=document.getElementById("card");
     card.classList.add("show");
-
     document.getElementById("isi").innerHTML=
-    "Teruntuk "+n+"<br><br>"+
-    "بـمنـاسـبـة حلــول عيـــد الفطر المبـــارك ✨<br><br>"+
-    "أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة.<br>"+
-    "لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹<br><br>"+
-    "عيد فطر مبارك وكل عام وأنتم إلى اللــه أقرب";
+        "Teruntuk "+n+"<br><br>"+
+        "بـمنـاسـبـة حلــول عيـــد الفطر المبـــارك ✨<br><br>"+
+        "أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة.<br>"+
+        "لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹<br><br>"+
+        "عيد فطر مبارك وكل عام وأنتم إلى اللــه أقرب";
 
     fallingStars();
     confettiFall();
