@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>عيد سعيد🌙</title>
+<title>عيد سعيد! 🌙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -146,23 +146,23 @@ h2,p {
 
 <script>
 function go(){
-let n=document.getElementById("nama").value;
-if(n==""){alert("Isi nama dulu 😤");return;}
+    let n=document.getElementById("nama").value;
+    if(n==""){ alert("Isi nama dulu 😤"); return; }
 
-document.getElementById("start").style.display="none";
-document.getElementById("card").style.display="block";
+    document.getElementById("start").style.display="none";
+    document.getElementById("card").style.display="block";
 
-document.getElementById("isi").innerHTML =
-"Teruntuk "+n+"<br><br>"+
-"بـمنـاسـبـة حلــول عيـــد الفطر المبـــارك ✨<br><br>"+
-"أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة.<br>"+
-"لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹<br><br>"+
-"عيد فطر مبارك وكل عام وأنتم إلى اللــه أقرب";
+    document.getElementById("isi").innerHTML =
+    "Teruntuk "+n+"<br><br>"+
+    "بـمنـاسـبـة حلــول عيـــد الفطر المبـــارك ✨<br><br>"+
+    "أتمنى لك طاعة مقبولة وأعمال صالحة متقبلة.<br>"+
+    "لتكن أيامك مليئة بالسعادة والتفاؤل والسلام 🌹<br><br>"+
+    "عيد فطر مبارك وكل عام وأنتم إلى اللــه أقرب";
 
-// play musik setelah klik
-let audio = document.getElementById("bgm");
-audio.volume = 0.3; // lembut
-audio.play();
+    // play backsound takbiran
+    let audio = document.getElementById("bgm");
+    audio.volume = 0.3; // lembut
+    audio.play().catch(() => console.log("Klik tombol dulu agar audio jalan"));
 }
 </script>
 
